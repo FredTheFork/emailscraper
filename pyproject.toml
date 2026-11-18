@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "window-harvester"
+version = "1.0.0"
+description = "Massive-scale global window, glazing & glass business website discovery engine (100k–500k+ deduplicated domains)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx[http2]>=0.26.0",
+    "aiohttp>=3.9.0",
+    "tldextract>=5.0.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.0.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "duckdb>=1.0.0",
+    "ddgs>=9.0.0",
+]
+
+[project.optional-dependencies]
+browser = [
+    "playwright>=1.42.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+all = [
+    "playwright>=1.42.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+window-harvester = "window_harvester.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["window_harvester*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
